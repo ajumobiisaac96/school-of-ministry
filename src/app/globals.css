@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+:root {
+  --background: #110014;
+  --foreground: #F5EFEB;
+  --font-inter: var(--font-inter), sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+}
+
+@theme {
+  --color-background: #110014;
+  --color-surface-dim: #1e0022;
+  --color-surface-bright: #3f0c43;
+  --color-surface-container-lowest: #0a000c;
+  --color-surface-container-low: #17001a;
+  --color-surface-container: #220027;
+  --color-surface-container-high: #2d0034;
+  --color-surface-container-highest: #3a0042;
+  
+  --color-primary: #9E7B28; /* Gold */
+  --color-primary-hover: #b59441;
+  --color-primary-dark: #8A6623;
+  
+  --color-secondary: #3f0c43; /* Royal Purple */
+  --color-secondary-hover: #521357;
+  
+  --color-accent-gold: #D4AF37;
+  --color-accent-purple: #8C1D94;
+  
+  --color-text-light: #F5EFEB;
+  --color-text-muted: #c8b9cc;
+  --color-text-gold: #E5C158;
+  
+  --font-geist: var(--font-inter), sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+  
+  --radius-sm: 0.25rem;
+  --radius-default: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Brand selection color */
+::selection {
+  background-color: rgba(158, 123, 40, 0.35);
+  color: #fff;
+}
+
+/* Anchor smooth scroll offset for sticky header */
+[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Elegant mesh background for purple & gold theme */
+.mesh-gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(140, 29, 148, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 90% 15%, rgba(158, 123, 40, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 50% 85%, rgba(63, 12, 67, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Premium Gold Drop Shadow Effect (from screens) */
+.btn-gold-shadow {
+  box-shadow: 4px 4px 0px 0px rgba(138, 102, 35, 1);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-gold-shadow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px rgba(138, 102, 35, 1);
+}
+
+.btn-gold-shadow:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px rgba(138, 102, 35, 1);
+}
+
+/* Premium Purple Drop Shadow Effect */
+.btn-purple-shadow {
+  box-shadow: 4px 4px 0px 0px rgba(158, 123, 40, 0.7); /* gold shadow on purple button */
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-purple-shadow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px rgba(158, 123, 40, 0.7);
+}
+
+.btn-purple-shadow:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px rgba(158, 123, 40, 0.7);
+}
+
+/* Admissions Option Card Styling */
+.option-card {
+  background: #FFFDFC;
+  border: 1px solid rgba(63, 12, 67, 0.1);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  color: #110014;
+}
+
+.option-card:hover {
+  border-color: rgba(63, 12, 67, 0.4);
+  box-shadow: 0px 4px 12px rgba(63, 12, 67, 0.05);
+}
+
+.option-card-selected {
+  background: #FFFDFC;
+  border: 1px solid #3f0c43;
+  box-shadow: 0px 4px 16px rgba(63, 12, 67, 0.08);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #110014;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f0c43;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9E7B28;
+}

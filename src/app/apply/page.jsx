@@ -19,13 +19,12 @@ function QuestionnaireContent() {
 
   // State to manage current step
   const [step, setStep] = useState(1);
-  const totalSteps = 4;
+  const totalSteps = 3;
 
   // Selected values for each step
-  const [servingInLeadership, setServingInLeadership] = useState('');
-  const [ministryCalling, setMinistryCalling] = useState('');
-  const [ministryExperience, setMinistryExperience] = useState('');
-  const [statementOfPurpose, setStatementOfPurpose] = useState('');
+  const [q1, setQ1] = useState('');
+  const [q2, setQ2] = useState('');
+  const [q3, setQ3] = useState('');
 
   // UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,16 +52,16 @@ function QuestionnaireContent() {
   }, [searchParams]);
 
   const handleSelectOption = (value) => {
-    if (step === 1) setServingInLeadership(value);
-    if (step === 2) setMinistryCalling(value);
-    if (step === 3) setMinistryExperience(value);
+    if (step === 1) setQ1(value);
+    if (step === 2) setQ2(value);
+    if (step === 3) setQ3(value);
   };
 
   const handleNext = () => {
     // Validation
-    if (step === 1 && !servingInLeadership) return;
-    if (step === 2 && !ministryCalling) return;
-    if (step === 3 && !ministryExperience) return;
+    if (step === 1 && !q1) return;
+    if (step === 2 && !q2) return;
+    if (step === 3 && !q3) return;
 
     if (step < totalSteps) {
       setStep(step + 1);
@@ -81,21 +80,15 @@ function QuestionnaireContent() {
   };
 
   const handleSubmit = async () => {
-    if (!statementOfPurpose || statementOfPurpose.trim().length < 10) {
-      setSubmitError('Please write a slightly longer statement of purpose (at least 10 characters).');
-      return;
-    }
-
     setIsSubmitting(true);
     setSubmitError('');
 
     const payload = {
       fullName: candidateInfo.fullName,
       whatsappNumber: candidateInfo.whatsappNumber,
-      servingInLeadership,
-      ministryCalling,
-      ministryExperience,
-      statementOfPurpose
+      corePillar: q1,
+      ministryIntent: q2,
+      primaryGoal: q3
     };
 
     try {
@@ -118,33 +111,30 @@ function QuestionnaireContent() {
 
   // Step 1 Options
   const step1Options = [
-    { key: 'A', value: 'Yes', label: 'Yes' },
-    { key: 'B', value: 'No', label: 'No' },
-    { key: 'C', value: 'In Training', label: 'In Training' }
+    { key: 'A', value: 'Proclaiming the Gospel', label: 'Proclaiming the Gospel (Taking the good news to every land)' },
+    { key: 'B', value: 'Raising Ministers', label: 'Raising Ministers (Training men and women to fulfill the Father\'s will)' },
+    { key: 'C', value: 'Edifying the Church', label: 'Edifying the Church (Teaching Christ in simplicity and clarity)' }
   ];
 
   // Step 2 Options
   const step2Options = [
-    { key: 'A', value: 'Pastoral & Church Administration', label: 'Pastoral & Church Administration (Shepherding, oversight)' },
-    { key: 'B', value: 'Missions, Evangelism & Outreach', label: 'Missions, Evangelism & Outreach (Frontline ministry)' },
-    { key: 'C', value: 'Worship, Intercession & Creative Arts', label: 'Worship, Intercession & Creative Arts (Spiritual atmosphere)' },
-    { key: 'D', value: 'Marketplace Ministry & Governance', label: 'Marketplace Ministry & Governance (Societal influence)' }
+    { key: 'A', value: 'Evangelism & Soul-winning', label: 'By actively evangelizing and soul-winning.' },
+    { key: 'B', value: 'Leading & Mentoring', label: 'By leading and mentoring others in ministry.' },
+    { key: 'C', value: 'Teaching & Equipping', label: 'By studying the Word to teach and equip the church.' }
   ];
 
   // Step 3 Options
   const step3Options = [
-    { key: 'A', value: 'Aspiring', label: 'Aspiring (Seeking to discover my placement)' },
-    { key: 'B', value: 'Foundational', label: 'Foundational (1-3 years of active helper/ministry roles)' },
-    { key: 'C', value: 'Intermediate', label: 'Intermediate (3-7 years of leading departments or teams)' },
-    { key: 'D', value: 'Seasoned', label: 'Seasoned (7+ years of pioneer or executive leadership)' }
+    { key: 'A', value: 'Outreach Strategy', label: 'To gain boldness and strategy for outreach.' },
+    { key: 'B', value: 'Leadership Capacity', label: 'To develop leadership capacity to raise others.' },
+    { key: 'C', value: 'Sound Doctrine', label: 'To establish a solid foundation in sound doctrine.' }
   ];
 
   // Helper to check if current step can advance
   const canContinue = () => {
-    if (step === 1) return !!servingInLeadership;
-    if (step === 2) return !!ministryCalling;
-    if (step === 3) return !!ministryExperience;
-    if (step === 4) return !!statementOfPurpose && statementOfPurpose.trim().length >= 10;
+    if (step === 1) return !!q1;
+    if (step === 2) return !!q2;
+    if (step === 3) return !!q3;
     return false;
   };
 
@@ -186,16 +176,16 @@ function QuestionnaireContent() {
           Admissions Questionnaire
         </span>
 
-        {/* STEP 1: Leadership Status */}
+        {/* STEP 1: Core Pillar */}
         {step === 1 && (
           <div className="flex flex-col animate-fade-in">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#3f0c43] leading-tight mb-8">
-              Are you currently serving in a leadership capacity within your local assembly?
+              Which of our core pillars resonates most with your current calling?
             </h2>
 
             <div className="flex flex-col gap-4">
               {step1Options.map((opt) => {
-                const isSelected = servingInLeadership === opt.value;
+                const isSelected = q1 === opt.value;
                 return (
                   <button
                     key={opt.key}
@@ -229,12 +219,12 @@ function QuestionnaireContent() {
         {step === 2 && (
           <div className="flex flex-col animate-fade-in">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#3f0c43] leading-tight mb-8">
-              What is your primary area of spiritual calling or ministry interest?
+              How do you primarily intend to fulfill the Father's will in your generation?
             </h2>
 
             <div className="flex flex-col gap-4">
               {step2Options.map((opt) => {
-                const isSelected = ministryCalling === opt.value;
+                const isSelected = q2 === opt.value;
                 return (
                   <button
                     key={opt.key}
@@ -263,16 +253,16 @@ function QuestionnaireContent() {
           </div>
         )}
 
-        {/* STEP 3: Ministry Experience */}
+        {/* STEP 3: Primary Goal */}
         {step === 3 && (
           <div className="flex flex-col animate-fade-in">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#3f0c43] leading-tight mb-8">
-              What is your current level of experience in active ministry service?
+              What is your primary goal for joining this program?
             </h2>
 
             <div className="flex flex-col gap-4">
               {step3Options.map((opt) => {
-                const isSelected = ministryExperience === opt.value;
+                const isSelected = q3 === opt.value;
                 return (
                   <button
                     key={opt.key}
@@ -297,32 +287,6 @@ function QuestionnaireContent() {
                   </button>
                 );
               })}
-            </div>
-          </div>
-        )}
-
-        {/* STEP 4: Written Statement of Purpose */}
-        {step === 4 && (
-          <div className="flex flex-col animate-fade-in">
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#3f0c43] leading-tight mb-4">
-              Statement of Purpose
-            </h2>
-            <p className="text-xs leading-relaxed text-[#110014]/60 mb-6">
-              Briefly describe your spiritual journey, how you discovered your calling, and what you hope to achieve through this training program.
-            </p>
-
-            <div className="flex flex-col gap-3">
-              <textarea
-                value={statementOfPurpose}
-                onChange={(e) => setStatementOfPurpose(e.target.value)}
-                placeholder="Write your response here..."
-                rows={7}
-                className="w-full p-4 border border-[#3f0c43]/15 rounded-md text-xs focus:outline-none focus:border-[#3f0c43] focus:ring-1 focus:ring-[#3f0c43] text-[#110014]"
-              />
-
-              {submitError && (
-                <span className="text-xs font-semibold text-red-600 mt-1">{submitError}</span>
-              )}
             </div>
           </div>
         )}

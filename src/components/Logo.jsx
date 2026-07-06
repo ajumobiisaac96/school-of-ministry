@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Logo({ className = '', showText = true, size = 'md' }) {
+export default function Logo({ className = '', showText = true, size = 'md', light = false }) {
   const dimensions = {
     sm: { width: '40', height: '40', fontSize: 'text-[9px]' },
     md: { width: '80', height: '60', fontSize: 'text-[11px]' },
@@ -8,7 +8,7 @@ export default function Logo({ className = '', showText = true, size = 'md' }) {
   }[size] || { width: '80', height: '60', fontSize: 'text-[11px]' };
 
   return (
-    <div className={`flex flex-col items-center justify-center ${className}`}>
+    <div className={`flex flex-col items-start justify-center ${className}`}>
       <svg
         width={dimensions.width}
         height={dimensions.height}
@@ -57,7 +57,7 @@ export default function Logo({ className = '', showText = true, size = 'md' }) {
       </svg>
       {showText && (
         <span 
-          className={`mt-1 font-serif font-semibold text-center tracking-[0.2em] text-[#3f0c43] dark:text-[#E5C158] uppercase ${dimensions.fontSize}`}
+          className={`mt-1 font-serif font-semibold text-center tracking-[0.2em] uppercase ${dimensions.fontSize} ${light ? 'text-[#E5C158]' : 'text-[#3f0c43]'}`}
         >
           The Edifying Assembly
         </span>

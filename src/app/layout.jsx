@@ -1,7 +1,6 @@
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
-import BottomNav from "../components/BottomNav";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -44,8 +43,6 @@ export default function RootLayout({ children }) {
           {children}
         </main>
 
-        {/* Bottom Nav component */}
-        <BottomNav />
       </body>
     </html>
   );

@@ -23,36 +23,6 @@ export default function SuccessPage() {
 
       <div className="max-w-md mx-auto w-full flex flex-col items-center">
         
-        {/* IMAGE CARD WITH BADGES */}
-        <div className="relative w-full aspect-[4/5] max-w-[320px] rounded-lg shadow-xl mb-8 border border-[#3f0c43]/10">
-          
-          {/* Top Left Badge (Gold Graduation Cap) */}
-          <div className="absolute top-0 left-0 -translate-x-2 -translate-y-2 bg-[#9E7B28] text-white p-3.5 rounded shadow-lg z-20">
-            <GraduationCap className="w-6 h-6" />
-          </div>
-
-          {/* Main Image */}
-          <div className="absolute inset-0 rounded-lg overflow-hidden z-10">
-            <Image
-              src="/images/school_students_smiling.png"
-              alt="School Students Smiling"
-              fill
-              className="object-cover"
-              sizes="(max-w-md) 100vw, 320px"
-              priority
-            />
-          </div>
-
-          {/* Bottom Right Badge (Purple EST. 2024) */}
-          <div className="absolute bottom-4 right-4 bg-[#3f0c43] text-white py-3.5 px-4 flex flex-col items-center gap-1 shadow-lg rounded z-20 min-w-[90px]">
-            <Award className="w-5 h-5 text-[#E5C158]" />
-            <span className="text-[8px] font-bold tracking-widest uppercase">Est. 2024</span>
-          </div>
-
-          {/* Outline border overlay */}
-          <div className="absolute inset-2 border border-white/20 rounded z-15 pointer-events-none" />
-        </div>
-
         {/* SUBMISSION STATUS TAG */}
         <span className="bg-[#9E7B28] text-white text-[9px] font-bold tracking-[0.2em] px-3.5 py-1.5 rounded uppercase mb-4 shadow-sm">
           Submission Complete

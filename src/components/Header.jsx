@@ -9,7 +9,6 @@ import Link from 'next/link';
 export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -88,28 +87,7 @@ export default function Header() {
             </a>
           </div>
 
-          {/* Mobile menu toggle */}
-          <button
-            className="md:hidden text-white/80 hover:text-white p-2 rounded-lg hover:bg-white/5 transition"
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
         </div>
-
-        {/* Mobile nav dropdown */}
-        {mobileOpen && (
-          <div className="md:hidden bg-[#1b0021]/95 backdrop-blur-md border-t border-[#9E7B28]/20 px-6 py-6 flex flex-col gap-4">
-            <a
-              href="#enrollment-form"
-              onClick={() => setMobileOpen(false)}
-              className="mt-2 w-full text-center px-5 py-3 bg-[#9E7B28] hover:bg-[#b59441] text-white font-bold text-xs tracking-wider rounded-lg uppercase transition-all duration-200"
-            >
-              Secure Your Spot
-            </a>
-          </div>
-        )}
       </header>
     </>
   );

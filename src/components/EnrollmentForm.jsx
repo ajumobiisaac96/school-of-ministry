@@ -41,15 +41,15 @@ export default function EnrollmentForm() {
       <div className="flex flex-col gap-3 mb-6 bg-[#3f0c43]/5 rounded-lg p-4">
         <div className="flex items-center gap-3">
           <CheckCircle2 className="w-4 h-4 text-[#9E7B28] shrink-0" />
-          <span className="text-xs font-semibold text-[#110014]/90">Comprehensive Theological Training</span>
+          <span className="text-xs font-semibold text-[#110014]/90">Proclaiming the Gospel</span>
         </div>
         <div className="flex items-center gap-3">
           <CheckCircle2 className="w-4 h-4 text-[#9E7B28] shrink-0" />
-          <span className="text-xs font-semibold text-[#110014]/90">Leadership Mentorship Programs</span>
+          <span className="text-xs font-semibold text-[#110014]/90">Raising Ministers</span>
         </div>
         <div className="flex items-center gap-3">
           <CheckCircle2 className="w-4 h-4 text-[#9E7B28] shrink-0" />
-          <span className="text-xs font-semibold text-[#110014]/90">Global Networking Opportunities</span>
+          <span className="text-xs font-semibold text-[#110014]/90">Edifying the Church</span>
         </div>
       </div>
 
@@ -97,7 +97,7 @@ export default function EnrollmentForm() {
       </form>
 
       <span className="block text-center text-[8px] tracking-widest font-semibold text-[#110014]/40 uppercase mt-4">
-        Limited seats available for 2024
+        Limited seats available for 2026
       </span>
     </div>
   );

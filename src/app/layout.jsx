@@ -16,7 +16,37 @@ const playfair = Playfair_Display({
 
 export const metadata = {
   title: "The Edifying Assembly | School of Ministry",
-  description: "Equipping leaders for global impact. The Edifying Assembly School of Ministry provides structural integrity and spiritual depth for 21st-century spiritual governance.",
+  description:
+    "Equipping leaders for global impact. The Edifying Assembly School of Ministry provides structural integrity and spiritual depth for 21st-century spiritual governance.",
+  metadataBase: new URL("https://tea-school-of-ministry.vercel.app"),
+  openGraph: {
+    title: "The Edifying Assembly | School of Ministry",
+    description:
+      "Equipping leaders for global impact. The Edifying Assembly School of Ministry provides structural integrity and spiritual depth for 21st-century spiritual governance.",
+    url: "https://tea-school-of-ministry.vercel.app",
+    siteName: "TEA School of Ministry",
+    images: [
+      {
+        url: "/images/og-preview.png",
+        width: 1200,
+        height: 630,
+        alt: "The Edifying Assembly School of Ministry",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Edifying Assembly | School of Ministry",
+    description:
+      "Equipping leaders for global impact. The Edifying Assembly School of Ministry provides structural integrity and spiritual depth for 21st-century spiritual governance.",
+    images: ["/images/og-preview.png"],
+  },
+  icons: {
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
 };
 
 export const viewport = {

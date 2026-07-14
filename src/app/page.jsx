@@ -66,7 +66,7 @@ export default function LandingPage() {
             </h1>
 
             <p className="text-sm leading-relaxed text-white/95 mb-10 max-w-md drop-shadow-md font-medium">
-              A six-month intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.
+              A six-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -119,7 +119,7 @@ export default function LandingPage() {
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#3f0c43] leading-tight mb-4">
                 We are world changers &mdash;{' '}
                 <br className="hidden lg:block" />
-                <span className="text-[#9E7B28] italic">changing by the gospel.</span>
+                <span className="text-[#9E7B28] italic">Changing the world by the gospel.</span>
               </h2>
               <div className="w-12 h-[2px] bg-[#9E7B28] mx-auto lg:mx-0 mb-6" />
               <p className="text-sm md:text-base leading-relaxed text-[#110014]/75">
@@ -171,9 +171,9 @@ export default function LandingPage() {
 
               <div className="flex flex-col gap-4 mb-8">
                 {[
-                  'six-month intensive training',
+                  'six-week intensive training',
                   'Building effective Ministers',
-                  'Church growth systems',
+                  'implementation led',
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-[#9E7B28]/20 border border-[#E5C158]/40 flex items-center justify-center shrink-0">

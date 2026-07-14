@@ -2,10 +2,9 @@ export async function saveEnrollment(data) {
   const payload = {
     fullName: data.fullName || '',
     whatsappNumber: data.whatsappNumber || '',
-    servingInLeadership: data.servingInLeadership || '',
-    ministryCalling: data.ministryCalling || '',
-    ministryExperience: data.ministryExperience || '',
-    statementOfPurpose: data.statementOfPurpose || '',
+    basedInKaduna: data.basedInKaduna || '',
+    isChurchLeader: data.isChurchLeader || '',
+    enrollmentReason: data.enrollmentReason || '',
     submittedAt: new Date().toISOString(),
   };
 
@@ -30,7 +29,6 @@ export async function saveEnrollment(data) {
       return { success: true, fallback: false, documentId: result.documentId };
     }
 
-    // If server tells us it's not configured, go to localStorage fallback
     if (result.isConfigured === false) {
       console.warn('Server reports Appwrite is not configured. Falling back to local storage.');
       return saveToLocalStorage(payload);

@@ -21,6 +21,13 @@ export default function LandingPage() {
     return () => clearInterval(timer);
   }, []);
 
+  // Smooth scroll handler
+  const scrollToSection = (e, id) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="w-full flex flex-col">
 
@@ -53,18 +60,19 @@ export default function LandingPage() {
             </div>
 
             <h1 className="text-4xl md:text-5xl xl:text-6xl font-serif font-semibold leading-[1.12] text-white mb-6 drop-shadow-xl">
-              Changing <br className="hidden md:block" />
-              the World by <br className="hidden md:block" />
-              <span className="text-[#E5C158] italic font-serif drop-shadow-lg">the Gospel.</span>
+              <span className="block">Building</span>
+              <span className="block">effective Ministers</span>
+              <span className="block text-[#E5C158] italic font-serif drop-shadow-lg">through the word of God.</span>
             </h1>
 
             <p className="text-sm leading-relaxed text-white/95 mb-10 max-w-md drop-shadow-md font-medium">
-              Devoted to training men and women who will fulfil the Father's will in their generation—by proclaiming the good news and edifying the church.
+              A six-month intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <a
                 href="#enrollment-form"
+                onClick={(e) => scrollToSection(e, 'enrollment-form')}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#9E7B28] hover:bg-[#b59441] text-white font-bold text-xs tracking-wider rounded-lg uppercase transition-all duration-200 btn-gold-shadow w-full sm:w-auto"
               >
                 Secure Your Spot
@@ -88,75 +96,50 @@ export default function LandingPage() {
       <section id="about" className="w-full py-24 px-6 md:px-12 lg:px-20 bg-white text-[#110014]">
         <div className="max-w-7xl mx-auto">
 
-          {/* Intro text — centred, max readable width */}
-          <div className="max-w-2xl mx-auto text-center mb-16">
-            <span className="text-[9px] tracking-[0.3em] font-bold text-[#9E7B28] uppercase mb-4 block">
-              Who We Are
-            </span>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#3f0c43] leading-tight mb-4">
-              We are world changers —{' '}
-              <span className="text-[#9E7B28] italic">changing by the gospel.</span>
-            </h2>
-            <div className="w-12 h-[2px] bg-[#9E7B28] mx-auto mb-6" />
-            <p className="text-sm leading-relaxed text-[#110014]/65">
-              We believe that God&apos;s will for men is what Christ has done in his death, burial and resurrection — and this should be proclaimed in every land and exalted in every heart.
-            </p>
+          {/* Top row: image left, text right */}
+          <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16 max-w-6xl mx-auto">
+
+            {/* Left — Map Image (desktop only) */}
+            <div className="hidden lg:block w-full lg:w-[45%] shrink-0">
+              <div className="relative w-full rounded-xl overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                <Image
+                  src="/images/map.jpg"
+                  alt="World map — proclaiming the gospel to every land"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Right — Text content */}
+            <div className="w-full lg:w-[55%] text-center lg:text-left flex flex-col justify-center pt-0 lg:pt-4">
+              <span className="text-[9px] tracking-[0.3em] font-bold text-[#9E7B28] uppercase mb-4 block">
+                Who We Are
+              </span>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#3f0c43] leading-tight mb-4">
+                We are world changers &mdash;{' '}
+                <br className="hidden lg:block" />
+                <span className="text-[#9E7B28] italic">changing by the gospel.</span>
+              </h2>
+              <div className="w-12 h-[2px] bg-[#9E7B28] mx-auto lg:mx-0 mb-6" />
+              <p className="text-sm md:text-base leading-relaxed text-[#110014]/75">
+                We believe that God&apos;s will for men is what Christ has done in his death, burial and resurrection — and this should be proclaimed in every land and exalted in every heart.
+              </p>
+            </div>
+
           </div>
 
-          {/* Three pillars */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                number: '01',
-                title: 'Proclaiming the Gospel',
-                desc: "Taking the good news of Christ's death, burial, and resurrection to every land.",
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3f0c43" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="2" y1="12" x2="22" y2="12" />
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                  </svg>
-                ),
-              },
-              {
-                number: '02',
-                title: 'Raising Ministers',
-                desc: "Devoted to training men and women who will fulfil the Father's will in their generation.",
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3f0c43" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="9" cy="7" r="3" />
-                    <circle cx="17" cy="9" r="2.5" />
-                    <path d="M3 20c0-3.314 2.686-6 6-6s6 2.686 6 6" />
-                    <path d="M17 14c1.657 0 3 1.343 3 3v2" />
-                  </svg>
-                ),
-              },
-              {
-                number: '03',
-                title: 'Edifying the Church',
-                desc: 'Teaching Christ in simplicity and clarity so His Spirit moves freely and His church grows.',
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3f0c43" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                    <line x1="9" y1="9" x2="15" y2="9" />
-                    <line x1="9" y1="13" x2="13" y2="13" />
-                  </svg>
-                ),
-              },
-            ].map((pillar) => (
-              <div key={pillar.number} className="group relative bg-white border border-[#3f0c43]/10 rounded-2xl p-8 hover:border-[#9E7B28]/40 hover:shadow-lg transition-all duration-300 shadow-sm">
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-[#3f0c43]/6 border border-[#9E7B28]/20 flex items-center justify-center">
-                    {pillar.icon}
-                  </div>
-                  <span className="text-[9px] font-bold tracking-[0.2em] text-[#9E7B28]/50 uppercase">{pillar.number}</span>
-                </div>
-                <h3 className="text-lg font-serif font-semibold text-[#3f0c43] mb-3">{pillar.title}</h3>
-                <p className="text-sm leading-relaxed text-[#110014]/55">{pillar.desc}</p>
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#9E7B28] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl" />
-              </div>
-            ))}
+          {/* Bible verse — centered below, plain text, narrower on desktop */}
+          <div className="max-w-6xl mx-auto mt-14 text-center">
+            <div className="mx-auto max-w-md">
+              <p className="text-sm text-[#110014]/70 italic leading-relaxed font-medium">
+                &ldquo;And the things that thou hast heard of me among many witnesses, the same commit thou to faithful men, who shall be able to teach others also.&rdquo;
+              </p>
+              <p className="mt-3 text-base font-extrabold text-[#110014]">
+                2 Timothy 2:2
+              </p>
+              <p className="text-xs font-semibold text-[#110014]/50 mt-0.5 tracking-wide">King James Version</p>
+            </div>
           </div>
 
         </div>
@@ -183,14 +166,14 @@ export default function LandingPage() {
                 <span className="text-[#E5C158] italic">the Lead?</span>
               </h2>
               <p className="text-sm text-white/65 leading-relaxed mb-8">
-                Join a cohort of dedicated disciples and visionary leaders. Applications are now open for the 2026 Ministerial Cycle. Seats are limited — apply early.
+  Applications are now open for the 2026 school of ministry. Seats are limited — apply early.
               </p>
 
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 mb-8">
                 {[
-                  'Proclaiming the Gospel',
-                  'Raising Ministers',
-                  'Edifying the Church',
+                  'six-month intensive training',
+                  'Building effective Ministers',
+                  'Church growth systems',
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-[#9E7B28]/20 border border-[#E5C158]/40 flex items-center justify-center shrink-0">
@@ -202,6 +185,16 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
+
+              {/* Mobile only button */}
+              <a
+                href="#enrollment-form"
+                onClick={(e) => scrollToSection(e, 'enrollment-form')}
+                className="lg:hidden inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#9E7B28] hover:bg-[#b59441] text-white font-bold text-xs tracking-wider rounded-lg uppercase transition-all duration-200 btn-gold-shadow w-full sm:w-auto"
+              >
+                Secure Your Spot
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
 
 
@@ -214,11 +207,12 @@ export default function LandingPage() {
                 </svg>
               </div>
               <div>
-                <p className="text-lg font-serif font-semibold text-white mb-1">Begin Your Journey</p>
+                <p className="text-lg font-serif font-semibold text-white mb-1">Enroll Now</p>
                 <p className="text-xs text-white/50">Scroll up to apply or click below</p>
               </div>
               <a
                 href="#enrollment-form"
+                onClick={(e) => scrollToSection(e, 'enrollment-form')}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#9E7B28] hover:bg-[#b59441] text-white font-bold text-xs tracking-wider rounded-lg uppercase transition-all duration-200 btn-gold-shadow"
               >
                 Secure Your Spot

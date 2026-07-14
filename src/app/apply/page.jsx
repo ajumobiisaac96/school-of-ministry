@@ -21,10 +21,10 @@ function QuestionnaireContent() {
   const [step, setStep] = useState(1);
   const totalSteps = 3;
 
-  // Selected values for each step
-  const [q1, setQ1] = useState('');
-  const [q2, setQ2] = useState('');
-  const [q3, setQ3] = useState('');
+  // Selected/entered values for each step
+  const [q1, setQ1] = useState('');  // Are you based in Kaduna state?
+  const [q2, setQ2] = useState('');  // Are you a leader/minister/worker/pastor?
+  const [q3, setQ3] = useState('');  // Reason for enrolling (free text)
 
   // UI state
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,7 +40,6 @@ function QuestionnaireContent() {
       phone = localStorage.getItem('tea_inquiry_whatsappNumber') || '';
     }
 
-    // Default placeholder if none provided
     if (!name) {
       name = 'Anonymous Applicant';
     }
@@ -54,14 +53,12 @@ function QuestionnaireContent() {
   const handleSelectOption = (value) => {
     if (step === 1) setQ1(value);
     if (step === 2) setQ2(value);
-    if (step === 3) setQ3(value);
   };
 
   const handleNext = () => {
-    // Validation
     if (step === 1 && !q1) return;
     if (step === 2 && !q2) return;
-    if (step === 3 && !q3) return;
+    if (step === 3 && !q3.trim()) return;
 
     if (step < totalSteps) {
       setStep(step + 1);
@@ -74,7 +71,6 @@ function QuestionnaireContent() {
     if (step > 1) {
       setStep(step - 1);
     } else {
-      // Go back to landing page
       router.push('/');
     }
   };
@@ -86,15 +82,14 @@ function QuestionnaireContent() {
     const payload = {
       fullName: candidateInfo.fullName,
       whatsappNumber: candidateInfo.whatsappNumber,
-      corePillar: q1,
-      ministryIntent: q2,
-      primaryGoal: q3
+      basedInKaduna: q1,
+      isChurchLeader: q2,
+      enrollmentReason: q3.trim(),
     };
 
     try {
       const result = await saveEnrollment(payload);
       if (result.success) {
-        // Successful submit - redirect to success page
         router.push('/success');
       } else {
         setSubmitError('Failed to save your application. Please try again.');
@@ -102,7 +97,6 @@ function QuestionnaireContent() {
       }
     } catch (err) {
       console.error('Error submitting questionnaire:', err);
-      // Wait for a second and then force success in dev/demo mode since we have local storage fallback inside saveEnrollment
       setTimeout(() => {
         router.push('/success');
       }, 1000);
@@ -111,30 +105,21 @@ function QuestionnaireContent() {
 
   // Step 1 Options
   const step1Options = [
-    { key: 'A', value: 'Proclaiming the Gospel', label: 'Proclaiming the Gospel (Taking the good news to every land)' },
-    { key: 'B', value: 'Raising Ministers', label: 'Raising Ministers (Training men and women to fulfill the Father\'s will)' },
-    { key: 'C', value: 'Edifying the Church', label: 'Edifying the Church (Teaching Christ in simplicity and clarity)' }
+    { key: 'A', value: 'YES', label: 'YES' },
+    { key: 'B', value: 'NO', label: 'NO' },
   ];
 
   // Step 2 Options
   const step2Options = [
-    { key: 'A', value: 'Evangelism & Soul-winning', label: 'By actively evangelizing and soul-winning.' },
-    { key: 'B', value: 'Leading & Mentoring', label: 'By leading and mentoring others in ministry.' },
-    { key: 'C', value: 'Teaching & Equipping', label: 'By studying the Word to teach and equip the church.' }
-  ];
-
-  // Step 3 Options
-  const step3Options = [
-    { key: 'A', value: 'Outreach Strategy', label: 'To gain boldness and strategy for outreach.' },
-    { key: 'B', value: 'Leadership Capacity', label: 'To develop leadership capacity to raise others.' },
-    { key: 'C', value: 'Sound Doctrine', label: 'To establish a solid foundation in sound doctrine.' }
+    { key: 'A', value: 'YES', label: 'YES' },
+    { key: 'B', value: 'NO', label: 'NO' },
   ];
 
   // Helper to check if current step can advance
   const canContinue = () => {
     if (step === 1) return !!q1;
     if (step === 2) return !!q2;
-    if (step === 3) return !!q3;
+    if (step === 3) return q3.trim().length >= 10;
     return false;
   };
 
@@ -176,11 +161,11 @@ function QuestionnaireContent() {
           Admissions Questionnaire
         </span>
 
-        {/* STEP 1: Core Pillar */}
+        {/* STEP 1: Based in Kaduna? */}
         {step === 1 && (
           <div className="flex flex-col animate-fade-in">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#3f0c43] leading-tight mb-8">
-              Which of our core pillars resonates most with your current calling?
+              Are you based in Kaduna State?
             </h2>
 
             <div className="flex flex-col gap-4">
@@ -191,13 +176,12 @@ function QuestionnaireContent() {
                     key={opt.key}
                     onClick={() => handleSelectOption(opt.value)}
                     className={`w-full py-5 px-5 text-left flex items-center justify-between transition-all duration-200 rounded-xl border ${
-                      isSelected 
-                        ? 'bg-[#3f0c43] border-[#3f0c43] text-white shadow-[0_8px_30px_rgb(63,12,67,0.2)] scale-[1.02]' 
+                      isSelected
+                        ? 'bg-[#3f0c43] border-[#3f0c43] text-white shadow-[0_8px_30px_rgb(63,12,67,0.2)] scale-[1.02]'
                         : 'bg-white border-[#3f0c43]/15 text-[#110014] hover:border-[#3f0c43]/40 hover:bg-[#3f0c43]/5'
                     }`}
                   >
                     <div className="flex items-center gap-4">
-                      {/* Left icon check or circle */}
                       <div className={`flex items-center justify-center w-6 h-6 rounded-full border ${isSelected ? 'border-white bg-[#9E7B28]' : 'border-[#3f0c43]/20'}`}>
                         {isSelected && <CheckCircle2 className="w-4 h-4 text-white" />}
                       </div>
@@ -215,11 +199,11 @@ function QuestionnaireContent() {
           </div>
         )}
 
-        {/* STEP 2: Ministry Calling */}
+        {/* STEP 2: Church Leader / Minister / Worker / Pastor? */}
         {step === 2 && (
           <div className="flex flex-col animate-fade-in">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#3f0c43] leading-tight mb-8">
-              How do you primarily intend to fulfill the Father's will in your generation?
+              Are you a leader, minister, worker or pastor in your church or elsewhere?
             </h2>
 
             <div className="flex flex-col gap-4">
@@ -230,8 +214,8 @@ function QuestionnaireContent() {
                     key={opt.key}
                     onClick={() => handleSelectOption(opt.value)}
                     className={`w-full py-5 px-5 text-left flex items-center justify-between transition-all duration-200 rounded-xl border ${
-                      isSelected 
-                        ? 'bg-[#3f0c43] border-[#3f0c43] text-white shadow-[0_8px_30px_rgb(63,12,67,0.2)] scale-[1.02]' 
+                      isSelected
+                        ? 'bg-[#3f0c43] border-[#3f0c43] text-white shadow-[0_8px_30px_rgb(63,12,67,0.2)] scale-[1.02]'
                         : 'bg-white border-[#3f0c43]/15 text-[#110014] hover:border-[#3f0c43]/40 hover:bg-[#3f0c43]/5'
                     }`}
                   >
@@ -253,42 +237,45 @@ function QuestionnaireContent() {
           </div>
         )}
 
-        {/* STEP 3: Primary Goal */}
+        {/* STEP 3: Reason for enrolling (free text) */}
         {step === 3 && (
           <div className="flex flex-col animate-fade-in">
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#3f0c43] leading-tight mb-8">
-              What is your primary goal for joining this program?
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-[#3f0c43] leading-tight mb-3">
+              What is your reason for enrolling for this program?
             </h2>
+            <p className="text-xs text-[#110014]/50 mb-6">Share in your own words — minimum 10 characters.</p>
 
-            <div className="flex flex-col gap-4">
-              {step3Options.map((opt) => {
-                const isSelected = q3 === opt.value;
-                return (
-                  <button
-                    key={opt.key}
-                    onClick={() => handleSelectOption(opt.value)}
-                    className={`w-full py-5 px-5 text-left flex items-center justify-between transition-all duration-200 rounded-xl border ${
-                      isSelected 
-                        ? 'bg-[#3f0c43] border-[#3f0c43] text-white shadow-[0_8px_30px_rgb(63,12,67,0.2)] scale-[1.02]' 
-                        : 'bg-white border-[#3f0c43]/15 text-[#110014] hover:border-[#3f0c43]/40 hover:bg-[#3f0c43]/5'
-                    }`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`flex items-center justify-center shrink-0 w-6 h-6 rounded-full border ${isSelected ? 'border-white bg-[#9E7B28]' : 'border-[#3f0c43]/20'}`}>
-                        {isSelected && <CheckCircle2 className="w-4 h-4 text-white" />}
-                      </div>
-                      <div className="flex flex-col max-w-[85%]">
-                        <span className={`text-[9px] tracking-wider font-bold uppercase mb-0.5 ${isSelected ? 'text-[#E5C158]' : 'text-[#110014]/40'}`}>
-                          Option {opt.key}
-                        </span>
-                        <span className={`text-xs font-bold leading-snug ${isSelected ? 'text-white' : 'text-[#110014]/90'}`}>{opt.label}</span>
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
+            <textarea
+              value={q3}
+              onChange={(e) => setQ3(e.target.value)}
+              placeholder="e.g. I want to grow in my understanding of the Word and be equipped to disciple others effectively..."
+              rows={6}
+              className={`w-full px-4 py-3 bg-white border-2 rounded-xl text-sm text-[#110014] placeholder-[#110014]/35 focus:outline-none transition-colors resize-none leading-relaxed ${
+                q3.trim().length > 0 && q3.trim().length < 10
+                  ? 'border-red-400 focus:border-red-400'
+                  : q3.trim().length >= 10
+                  ? 'border-[#9E7B28] focus:border-[#9E7B28]'
+                  : 'border-[#3f0c43]/20 focus:border-[#3f0c43]/50'
+              }`}
+            />
+            <div className="flex items-center justify-between mt-2">
+              {q3.trim().length > 0 && q3.trim().length < 10 && (
+                <span className="text-[10px] text-red-500 font-medium">Please write at least 10 characters.</span>
+              )}
+              {q3.trim().length >= 10 && (
+                <span className="text-[10px] text-[#9E7B28] font-bold flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" /> Looks good!
+                </span>
+              )}
+              <span className={`ml-auto text-[10px] font-mono ${q3.length > 500 ? 'text-red-400' : 'text-[#110014]/35'}`}>
+                {q3.length} / 500
+              </span>
             </div>
           </div>
+        )}
+
+        {submitError && (
+          <p className="mt-4 text-xs text-red-500 font-semibold text-center">{submitError}</p>
         )}
       </div>
 
@@ -313,9 +300,9 @@ function QuestionnaireContent() {
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
             </>
           ) : step === totalSteps ? (
-            'Submit'
+            <>Submit <ArrowRight className="w-3.5 h-3.5" /></>
           ) : (
-            'Continue'
+            <>Continue <ArrowRight className="w-3.5 h-3.5" /></>
           )}
         </button>
       </div>

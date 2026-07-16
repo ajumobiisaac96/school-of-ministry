@@ -173,7 +173,7 @@ export default function LandingPage() {
                 {[
                   '6-week intensive training',
                   'Building effective Ministers',
-                  'implementation led',
+                  'Implementation led',
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-[#9E7B28]/20 border border-[#E5C158]/40 flex items-center justify-center shrink-0">

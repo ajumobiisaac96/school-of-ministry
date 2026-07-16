@@ -97,7 +97,7 @@ export default function EnrollmentForm() {
         </div>
         <div className="flex items-center gap-3">
           <CheckCircle2 className="w-4 h-4 text-[#9E7B28] shrink-0" />
-          <span className="text-xs font-semibold text-[#110014]/90">implementation led</span>
+          <span className="text-xs font-semibold text-[#110014]/90">Implementation led</span>
         </div>
       </div>
 

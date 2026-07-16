@@ -61,12 +61,12 @@ export default function LandingPage() {
 
             <h1 className="text-4xl md:text-5xl xl:text-6xl font-serif font-semibold leading-[1.12] text-white mb-6 drop-shadow-xl">
               <span className="block">Building</span>
-              <span className="block">effective Ministers</span>
+              <span className="block">Effective Ministers</span>
               <span className="block text-[#E5C158] italic font-serif drop-shadow-lg">through the word of God.</span>
             </h1>
 
             <p className="text-sm leading-relaxed text-white/95 mb-10 max-w-md drop-shadow-md font-medium">
-              A six-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.
+              6-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -171,7 +171,7 @@ export default function LandingPage() {
 
               <div className="flex flex-col gap-4 mb-8">
                 {[
-                  'six-week intensive training',
+                  '6-week intensive training',
                   'Building effective Ministers',
                   'implementation led',
                 ].map((item) => (

@@ -17,12 +17,12 @@ const playfair = Playfair_Display({
 export const metadata = {
   title: "The Edifying Assembly | School of Ministry",
   description:
-    "A 6-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.",
+    "A 8-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.",
   metadataBase: new URL("https://tea-school-of-ministry.vercel.app"),
   openGraph: {
     title: "The Edifying Assembly | School of Ministry",
     description:
-      "A 6-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.",
+      "A 8-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.",
     url: "https://tea-school-of-ministry.vercel.app",
     siteName: "TEA School of Ministry",
     images: [
@@ -40,7 +40,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "The Edifying Assembly | School of Ministry",
     description:
-      "A 6-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.",
+      "A 8-week intensive training program equipping pastors and church leaders with practical systems for sustainable, scalable, spirit-led ministry.",
     images: ["/images/og-preview.png"],
   },
   icons: {
